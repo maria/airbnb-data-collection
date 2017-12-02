@@ -79,7 +79,7 @@ class ABConfig():
                 self.HTTP_PROXY_LIST = config["NETWORK"]["proxy_list"].split(",")
                 self.HTTP_PROXY_LIST = [x.strip() for x in self.HTTP_PROXY_LIST]
             except Exception:
-                logger.warning("No proxy_list in " + config_file + ": not using proxies")
+                logger.warning("No proxy_list in " + self.config_file + ": not using proxies")
                 self.HTTP_PROXY_LIST = []
             self.HTTP_PROXY_LIST_COMPLETE = list(self.HTTP_PROXY_LIST)
             logging.info("Complete proxy list has {p} proxies".format(p=len(self.HTTP_PROXY_LIST_COMPLETE)))
