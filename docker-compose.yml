@@ -1,0 +1,29 @@
+version: '2.1'
+services:
+  db:
+    build:
+      context: ./
+      dockerfile: Dockerfile-db
+    network_mode: bridge
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: airbnb
+    healthcheck:
+        test: ["CMD", "nc", "-z", "-v", "0.0.0.0", "5432"]
+        interval: 5s
+        timeout: 10s
+        retries: 5
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile-app
+    network_mode: bridge
+    environment:
+      USER: root
+    depends_on:
+      db:
+        condition: service_healthy
+    links:
+      - db

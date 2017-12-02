@@ -1,0 +1,8 @@
+docker*
+Docker*
+.git*
+example.config
+requirements.txt
+notes.md
+README.md
+LICENSE.md

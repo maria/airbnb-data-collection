@@ -1,0 +1,15 @@
+FROM centos/python-34-centos7:latest
+
+USER root
+WORKDIR /opt/
+
+RUN yum install -y python-psycopg2 python-devel libxslt-devel && \
+    LD_LIBRARY_PATH=/opt/rh/rh-python34/root/usr/lib64 pip install psycopg2 requests lxml && \
+    mkdir /opt/airbnb-data-collection/
+
+WORKDIR /opt/airbnb-data-collection/
+
+ADD . ./
+RUN chmod +x start.sh
+
+ENTRYPOINT "./start.sh"
