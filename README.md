@@ -11,6 +11,28 @@ Sometimes the Airbnb site refuses repeated requests. I run the script using a nu
 - Python 3.4 or later
 - PostgreSQL 9.5 or later (as the script uses "INSERT ... ON CONFLICT UPDATE")
 
+or use **Docker**
+
+- Install [Docker CE](https://docs.docker.com/engine/installation/)
+- You need python2.7 or python3 and pip
+- Run `pip install -r requirements.txt`
+- Build containers: `docker-compose build`
+- Run containers: `docker-compose up -d`
+
+Now you will have a database container and a exited app container:
+
+```
+$ docker ps -a
+CONTAINER ID        IMAGE                      COMMAND                   CREATED             STATUS                      PORTS               NAMES
+40f5e9727536        airbnbdatacollection_app   "/bin/sh -c \"./sta..."   1 minutes ago       Exited (0) 2 seconds ago                        airbnbdatacollection_app_1
+788ed2c37efc        airbnbdatacollection_db    "docker-entrypoint..."    1 minutes ago       Running                      airbnbdatacollection_db_1
+```
+- You can now run an app container which will be connected to the databases
+
+```
+ $ docker run --link airbnbcollect_db_1:db -it -e USER=root --entrypoint /bin/bash airbnbcollect_app
+```
+
 ## Using the script
 
 You must be comfortable messing about with databases and python to use this.
