@@ -9,7 +9,6 @@
 *.pyc
 *.bat
 *.json
-*.sh
 *.xlsx
 temp.*
 googlemaps.py
